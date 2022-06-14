@@ -10,11 +10,10 @@ public class Field {
     private int cols;
     private float width;
     private float height;
-    //private Rectangle field;
 
-    private Picture background = new Picture(Field.PADDING+25,Field.PADDING-6, "bg.jpg");
-    private Picture menuPic = new Picture(10,10,"main.png");
-    private Picture gameOverPic = new Picture(10,10, "gameover.png");
+    private Picture background = new Picture(Field.PADDING + 25, Field.PADDING - 6, "bg.jpg");
+    private Picture menuPic = new Picture(10, 10, "main.png");
+    private Picture gameOverPic = new Picture(10, 10, "gameover.png");
 
 
     public Field(int cols, int rows) {
@@ -53,30 +52,19 @@ public class Field {
         background.delete();
         menuPic.delete();
         gameOverPic.delete();
-        if (Scenes.MENU == state){
+        if (Scenes.MENU == state) {
             menuPic.draw();
         } else if (Scenes.GAME == state) {
             background.draw();
-        }else {
+        } else {
             gameOverPic.draw();
         }
-        //field.draw();
     }
 
 
     public void hide() {
 
     }
-/*
-    public void setField(Rectangle field) {
-        this.field = field;
-    }
-
-    public void deletePicture() {
-        this.field.delete();
-    }
-
- */
 
     public float getWidth() {
         return background.getWidth();
@@ -91,32 +79,22 @@ public class Field {
         return PADDING;
     }
 
-    public int getMaxX(){
+    public int getMaxX() {
         return background.getMaxX();
     }
-    public int getMaxY(){
+
+    public int getMaxY() {
 
         return background.getMaxY();
     }
 
-    public int getX(){
+    public int getX() {
         return background.getX();
     }
 
-    public int getY(){
+    public int getY() {
         return background.getY();
     }
-
-/*
-    public float getWidth() {
-        return this.field.getWidth();
-    }
-
-    public float getHeight() {
-        return this.field.getHeight();
-    }
-
- */
 
     public int colsToX(int cols) {
         return PADDING + (cols * CELL_SIZE);

@@ -11,9 +11,10 @@ public class Lives {
 
     public Lives(Field field) {
         lives = new Picture[10];
-        lives[0] = new Picture(field.getMaxX() - 100, field.getMaxY()-55, "beer.png");
+        lives[0] = new Picture(field.getMaxX() - 100, field.getMaxY() - 55, "beer.png");
         for (int i = 1; i < lives.length; i++) {
-            lives[i] = new Picture(lives[i - 1].getX() - lives[i - 1].getWidth() - 10, field.getMaxY()-55, "beer.png");
+            lives[i] = new Picture(lives[i - 1].getX() - lives[i - 1].getWidth() - 10, field.getMaxY() - 55, "beer" +
+                    ".png");
         }
         numLives = 10;
         hasLives = true;

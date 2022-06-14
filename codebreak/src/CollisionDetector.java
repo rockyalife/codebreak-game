@@ -13,10 +13,10 @@ public class CollisionDetector {
     ArrayList<Beer> beers;
     ArrayList<Enemy> enemies;
     Character player;
-    SoundHandler yesBaby= new SoundHandler("sound/yesbaby.wav",false);
-    SoundHandler fresh= new SoundHandler("sound/fresh.wav",false);
-    SoundHandler bitdrunk= new SoundHandler("sound/bitdrunk.wav",false);
-    SoundHandler beerbeer= new SoundHandler("sound/beerbeer.wav",false);
+    SoundHandler yesBaby = new SoundHandler("sound/yesbaby.wav", false);
+    SoundHandler fresh = new SoundHandler("sound/fresh.wav", false);
+    SoundHandler bitdrunk = new SoundHandler("sound/bitdrunk.wav", false);
+    SoundHandler beerbeer = new SoundHandler("sound/beerbeer.wav", false);
     SoundHandler bastard = new SoundHandler("sound/bloodybastard.wav", false);
 
 
@@ -26,19 +26,24 @@ public class CollisionDetector {
         this.player = player;
     }
 
-    public void loopCollision(){
+    public void loopCollision() {
 
-        for(int i = 0; i < beers.size(); i++){
-            if (checkCollision(beers.get(i))){
+        for (int i = 0; i < beers.size(); i++) {
+            if (checkCollision(beers.get(i))) {
                 Score.upScore();
                 System.out.println(Score.getScore());
 
                 double rand = Math.random();
 
-                if (rand < 0.6){ yesBaby.play(); }
-                else if (rand < 0.8){ fresh.play(); }
-                else if (rand < 0.9){ bitdrunk.play(); }
-                else{ beerbeer.play(); }
+                if (rand < 0.6) {
+                    yesBaby.play();
+                } else if (rand < 0.8) {
+                    fresh.play();
+                } else if (rand < 0.9) {
+                    bitdrunk.play();
+                } else {
+                    beerbeer.play();
+                }
 
                 beers.get(i).getPic().delete();
                 beers.remove(i);
@@ -55,9 +60,8 @@ public class CollisionDetector {
         }
     }
 
-    public boolean checkCollision(Beer beer){
-        if (beer.getPic().getY() > player.getPicture().getY() && beer.getPic().getY() < player.getPicture().getMaxY()
-                && beer.getPic().getX() > player.getPicture().getX() && beer.getPic().getX() < player.getPicture().getMaxX()){
+    public boolean checkCollision(Beer beer) {
+        if (beer.getPic().getY() > player.getPicture().getY() && beer.getPic().getY() < player.getPicture().getMaxY() && beer.getPic().getX() > player.getPicture().getX() && beer.getPic().getX() < player.getPicture().getMaxX()) {
             System.out.println("COLLISION");
             return true;
         }
@@ -66,9 +70,8 @@ public class CollisionDetector {
     }
 
 
-    public boolean checkEnemyCollision(Enemy enemy){
-        if (enemy.getPic().getY() > player.getPicture().getY() && enemy.getPic().getY() < player.getPicture().getMaxY()
-                && enemy.getPic().getX() > player.getPicture().getX() && enemy.getPic().getX() < player.getPicture().getMaxX()){
+    public boolean checkEnemyCollision(Enemy enemy) {
+        if (enemy.getPic().getY() > player.getPicture().getY() && enemy.getPic().getY() < player.getPicture().getMaxY() && enemy.getPic().getX() > player.getPicture().getX() && enemy.getPic().getX() < player.getPicture().getMaxX()) {
             System.out.println("COLLISION WITH ENEMY");
             player.looseLife();
             return true;

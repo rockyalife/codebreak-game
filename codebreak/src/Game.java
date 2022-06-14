@@ -17,16 +17,16 @@ public class Game {
 
     private Field field;
     private Character player;
-    private  Controls controls;
+    private Controls controls;
     private Lives lives;
     private Score score;
-    SoundHandler damnit = new SoundHandler("sound/damnit.wav",false);
-    SoundHandler dontspill= new SoundHandler("sound/dontspill.wav",false);
-    SoundHandler fckinhell = new SoundHandler("sound/fckinhell.wav",false);
-    SoundHandler bgMusic = new SoundHandler("sound/bgMusic_org.wav",true);
-    SoundHandler wasted = new SoundHandler("sound/wasted.wav",false);
+    SoundHandler damnit = new SoundHandler("sound/damnit.wav", false);
+    SoundHandler dontspill = new SoundHandler("sound/dontspill.wav", false);
+    SoundHandler fckinhell = new SoundHandler("sound/fckinhell.wav", false);
+    SoundHandler bgMusic = new SoundHandler("sound/bgMusic_org.wav", true);
+    SoundHandler wasted = new SoundHandler("sound/wasted.wav", false);
 
-    Picture border = new Picture(10,0, "border.png");
+    Picture border = new Picture(10, 0, "border.png");
 
     private CollisionDetector collisionDetector;
     private ArrayList<Beer> beers;
@@ -35,9 +35,9 @@ public class Game {
     static Scenes gameState = Scenes.MENU;
 
     public Game(int cols, int rows) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        field = new Field(cols,rows);
+        field = new Field(cols, rows);
         lives = new Lives(field);
-        player = new Character(lives,field);
+        player = new Character(lives, field);
         beers = new ArrayList<>();
         enemies = new ArrayList<>();
         collisionDetector = new CollisionDetector(beers, player, enemies);
@@ -57,7 +57,7 @@ public class Game {
     }
 
     public void start() throws InterruptedException {
-        while (gameState == Scenes.MENU){
+        while (gameState == Scenes.MENU) {
             System.out.println("MENU");
         }
 
@@ -67,14 +67,14 @@ public class Game {
         score.showScore();
         border.draw();
 
-        while (gameState == Scenes.GAME){
+        while (gameState == Scenes.GAME) {
             beerFactory();
             enemyFactory();
             Thread.sleep(10);
             beerMovement();
             enemyMovement();
             collisionDetector.loopCollision();
-            if (!lives.stillHaveLives()){
+            if (!lives.stillHaveLives()) {
                 score.showScoreGameOver();
                 break;
             }
@@ -82,7 +82,6 @@ public class Game {
         gameOver();
         field.show(Scenes.GAMEOVER);
 
-        //System.exit(0);
     }
 
     public void setPlayer(Character player) {
@@ -101,7 +100,7 @@ public class Game {
         return field;
     }
 
-    public void gameOver(){
+    public void gameOver() {
 
         gameState = Scenes.GAMEOVER;
         wasted.play();
@@ -109,8 +108,8 @@ public class Game {
     }
 
 
-    public void beerFactory(){
-        while (beers.size() < 20){
+    public void beerFactory() {
+        while (beers.size() < 20) {
             beers.add(new Beer(field));
             border.delete();
             border.draw();
@@ -120,15 +119,19 @@ public class Game {
     public void beerMovement() {
 
         for (int i = 0; i < beers.size(); i++) {
-            if (beers.get(i).getPic().getMaxY() < field.getMaxY()-100){
-                beers.get(i).getPic().translate(0,1.5);
-            }else{
+            if (beers.get(i).getPic().getMaxY() < field.getMaxY() - 100) {
+                beers.get(i).getPic().translate(0, 1.5);
+            } else {
                 player.looseLife();
                 double rand = Math.random();
 
-                if (rand < 0.6){damnit.play();}
-                else if (rand < 0.9){dontspill.play();}
-                else{fckinhell.play();}
+                if (rand < 0.6) {
+                    damnit.play();
+                } else if (rand < 0.9) {
+                    dontspill.play();
+                } else {
+                    fckinhell.play();
+                }
 
                 beers.get(i).getPic().delete();
                 beers.remove(beers.get(i));
@@ -147,7 +150,7 @@ public class Game {
 
     public void enemyMovement() throws InterruptedException {
         for (int i = 0; i < enemies.size(); i++) {
-            if (enemies.get(i).getPic().getMaxY() < field.getMaxY()-100) {
+            if (enemies.get(i).getPic().getMaxY() < field.getMaxY() - 100) {
                 enemies.get(i).getPic().translate(0, 3);
             } else {
                 enemies.get(i).getPic().delete();

@@ -21,16 +21,20 @@ public class Score {
     }
 
 
-    public static void upScore()    {
+    public static void upScore() {
         score += SCORE;
         updateScore();
     }
-    public void resetScore() { score = 0; resetScoreDisplay(); }
+
+    public void resetScore() {
+        score = 0;
+        resetScoreDisplay();
+    }
 
     public void populateScoreDisplayDigits(int xCoordinate) {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 10; j++) {
-                scoreDisplay[i][j] = new Picture(xCoordinate, 565,   j + ".png");
+                scoreDisplay[i][j] = new Picture(xCoordinate, 565, j + ".png");
             }
             xCoordinate = scoreDisplay[i][0].getMaxX();
         }

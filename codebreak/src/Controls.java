@@ -15,7 +15,7 @@ public class Controls implements KeyboardHandler, MouseHandler {
     private Mouse mouse;
     private Game game;
 
-    public Controls(Character player, Game game){
+    public Controls(Character player, Game game) {
 
         keyboard = new Keyboard(this);
         mouse = new Mouse(this);
@@ -25,7 +25,7 @@ public class Controls implements KeyboardHandler, MouseHandler {
         init();
     }
 
-    public void init(){
+    public void init() {
 
         KeyboardEvent right = new KeyboardEvent();
         right.setKey(KeyboardEvent.KEY_RIGHT);
@@ -66,7 +66,7 @@ public class Controls implements KeyboardHandler, MouseHandler {
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-        switch (keyboardEvent.getKey()){
+        switch (keyboardEvent.getKey()) {
             case KeyboardEvent.KEY_RIGHT:
                 player.moveRight();
                 break;
@@ -77,7 +77,7 @@ public class Controls implements KeyboardHandler, MouseHandler {
                 System.exit(0);
                 break;
             case KeyboardEvent.KEY_E:
-                if (Game.gameState == Scenes.MENU){
+                if (Game.gameState == Scenes.MENU) {
                     Game.gameState = Scenes.GAME;
                 }
                 break;
@@ -87,7 +87,7 @@ public class Controls implements KeyboardHandler, MouseHandler {
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-        switch (keyboardEvent.getKey()){
+        switch (keyboardEvent.getKey()) {
             case KeyboardEvent.KEY_RIGHT:
                 player.idle2();
                 break;
@@ -96,30 +96,19 @@ public class Controls implements KeyboardHandler, MouseHandler {
                 break;
 
         }
-}
+    }
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-
-        /*
-        if (game.btnYes){
-            player.replay();
-        }
-        if (game.btnNo){
-            System.exit(0);
-        }
-
-         */
-
     }
 
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
-        if (mouseEvent.getX() > player.getPicture().getMaxX()){
+        if (mouseEvent.getX() > player.getPicture().getMaxX()) {
             player.moveRight();
+        } else if (mouseEvent.getX() < player.getPicture().getX()) {
+            player.moveLeft();
         }
-        else if (mouseEvent.getX() < player.getPicture().getX()){
-            player.moveLeft();}
 
     }
 }
